@@ -32,13 +32,3 @@ optional arguments:
   -v, --view            View the graph
   -c, --cluster         Create a cluster for each subfolder
 ```
-
-## Examples
-
-Example of a graph produced by the script:
-
-![Example 1](https://github.com/pvigier/dependency-graph/raw/master/examples/example1.png)
-
-Graph produced for the same project with clusters (`-c`):
-
-![Example 2](https://github.com/pvigier/dependency-graph/raw/master/examples/example2.png)
