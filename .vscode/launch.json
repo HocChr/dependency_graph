@@ -10,8 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["C:\\Users\\chochheim\\Documents\\PythonProjects\\dependency-graph\\hocchr_tests",
-                     "C:\\Users\\chochheim\\Documents\\PythonProjects\\dependency-graph\\Output\\pb-core",
+            "args": ["C:\\Users\\chochheim\\Documents\\PythonProjects\\dependency_graph\\examples",
+                     "C:\\Users\\chochheim\\Documents\\PythonProjects\\dependency_graph\\Output\\test",
                     "-f", "svg"]
         }
     ]

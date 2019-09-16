@@ -66,6 +66,52 @@ def create_graph(folder, create_cluster):
 						graph.edge(node, neighbor)
 	return graph
 
+def find_cycles(node, neigbours_list):
+	pass
+	#out = []
+	#for neigbor in neigbours_of_nodes:
+	#	if neigbor == node
+
+
+def create_graph_bidirectional(folder, create_cluster):
+	""" Create a graph from a folder. """
+	# Find nodes and clusters
+	files = find_all_files(folder)
+	folder_to_files = defaultdict(list)
+	for path in files:
+		folder_to_files[os.path.dirname(path)].append(path)
+	nodes = {normalize(path) for path in files}
+	# Create graph
+	graph = Digraph()
+	# Find edges and create clusters
+	
+	neigbours_of_nodes = {}
+
+	# build neigbors list
+	for folder in folder_to_files:
+		with graph.subgraph(name='cluster_{}'.format(folder)) as cluster:
+			for path in folder_to_files[folder]:					
+				node = normalize(path)
+				if not node in neigbours_of_nodes:
+					neigbours_of_nodes[node] = []
+				neigbours_list = []
+				if create_cluster:
+					cluster.node(node)
+				else:
+					graph.node(node)
+				neighbors = find_neighbors(path)
+				for neighbor in neighbors:
+					if neighbor != node and neighbor in nodes:
+						neigbours_list.append(neighbor)
+
+				neigbours_of_nodes[node].append(neigbours_list)
+	print(neigbours_of_nodes)
+	
+	for node in neigbours_list:
+		find_cycles(node, neigbours_list)
+
+	return graph
+
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument('folder', help='Path to the folder to scan')
@@ -76,5 +122,9 @@ if __name__ == '__main__':
 	parser.add_argument('-c', '--cluster', action='store_true', help='Create a cluster for each subfolder')
 	args = parser.parse_args()
 	graph = create_graph(args.folder, args.cluster)
+	create_graph_bidirectional(args.folder, args.cluster)
 	graph.format = args.format
+	# On Windows: if youre not an admin, set:
+	os.environ["PATH"] = os.environ["PATH"] + ";C:/Program Files (x86)/Graphviz2.38/bin/"
+	#print(os.environ["PATH"])
 	graph.render(args.output, cleanup=True, view=args.view)

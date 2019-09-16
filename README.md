@@ -15,6 +15,10 @@ sudo apt install graphviz
 pip3 install -r requirements.txt
 ```
 
+On Windows, if you have not grapviz on your path, set it. For exmaple, if you have no admin permissions:
+set PATH=%PATH%; "C:\Program Files (x86)\Graphviz2.38\bin"
+
+
 ## Manual
 
 ```
